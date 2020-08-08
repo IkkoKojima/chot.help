@@ -44,12 +44,7 @@ const IndexPage = () => {
 
   return (
     <Layout title="Home | Next.js + TypeScript Example">
-      <h1>Hello Next.js 👋</h1>
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </p>
+      <h1>最近のHELP!</h1>
       <Button primary icon onClick={() => router.reload()}><Icon name="refresh" /> 更新</Button>
       {displayTweets()}
     </Layout>

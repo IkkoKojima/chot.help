@@ -12,7 +12,7 @@ const Mypage = () => {
     })
     return (
         <Layout title="Mypage | Next.js + TypeScript Example">
-            <h1>Mypage</h1>
+            <h1>ここはマイページです</h1>
             {user
                 ?
                 <div>

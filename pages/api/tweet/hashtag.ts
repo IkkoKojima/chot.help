@@ -12,7 +12,7 @@ const client = new Twitter({
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
     async function search() {
         // reference : https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
-        const tweets = await client.get('search/tweets', { q: "#LoR -RT", count: 10, result_type: "recent" })
+        const tweets = await client.get('search/tweets', { q: "#ChotHelp -RT", count: 10, result_type: "recent" })
         return tweets
     }
     search()
