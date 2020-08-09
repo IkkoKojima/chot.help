@@ -4,7 +4,11 @@
 //
 // import User from 'path/to/interfaces';
 
-export type User = {
-  id: number
-  name: string
+export type Help = {
+  id: string
+  userId: string
+  title: string
+  body: string
+  timebox: number
+  fee: number
 }
