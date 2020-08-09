@@ -19,7 +19,7 @@ const AboutPage = () => {
     if (response.ok) {
       const json = await response.json()
       const helpId = json.help_id
-      router.push(`/help/${helpId}`)
+      // router.push(`/help/${helpId}`)
     } else {
       console.log("error")
     }
