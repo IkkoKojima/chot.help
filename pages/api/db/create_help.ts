@@ -14,7 +14,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     } = req
     const help_id = uid(20)
     let docRef = db.collection('helps').doc(help_id);
-    let setHelp = docRef.set({
+    docRef.set({
         user_id: user_id,
         title: title,
         body: body,

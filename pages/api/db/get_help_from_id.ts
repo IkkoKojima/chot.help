@@ -4,7 +4,7 @@ import { db } from '../../../firebase-config'
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const { query: { id } } = req
     let helpRef = db.collection('helps').doc(id as string);
-    let getDoc = helpRef.get()
+    helpRef.get()
         .then(doc => {
             if (!doc.exists) {
                 console.log('No such document!');

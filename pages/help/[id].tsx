@@ -4,7 +4,6 @@ import { Statistic } from 'semantic-ui-react'
 
 const HelpPage = (
     {
-        id,
         user_id,
         title,
         body,
