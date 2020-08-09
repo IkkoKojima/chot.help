@@ -3,7 +3,7 @@ import LoginButton from '../../components/LoginButton'
 import { useState } from 'react'
 import firebase from '../../firebase-config'
 import HelpForm from '../../components/HelpForm'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 const AboutPage = () => {
   const [user, setUser] = useState<null | firebase.User>(null)
@@ -11,15 +11,15 @@ const AboutPage = () => {
   const [body, setBody] = useState<string>("")
   const [timebox, setTimebox] = useState<string>("30")
   const [fee, setFee] = useState<string>("1000")
-  // const router = useRouter()
+  const router = useRouter()
 
   async function createHelp(user_id: string, title: string, body: string, timebox: string, fee: string) {
     const url = `${window.location.origin}/api/db/create_help?user_id=${user_id}&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&timebox=${timebox}&fee=${fee}`
     const response: Response = await fetch(url)
     if (response.ok) {
-      // const json = await response.json()
-      // const helpId = json.help_id
-      // router.push(`/help/${helpId}`)
+      const json = await response.json()
+      const helpId = json.help_id
+      router.push(`/help/${helpId}`)
     } else {
       console.log("error")
     }
