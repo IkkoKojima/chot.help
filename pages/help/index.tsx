@@ -17,8 +17,8 @@ const AboutPage = () => {
     const url = `${window.location.origin}/api/db/create_help?user_id=${user_id}&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&timebox=${timebox}&fee=${fee}`
     const response: Response = await fetch(url)
     if (response.ok) {
-      const json = await response.json()
-      const helpId = json.help_id
+      // const json = await response.json()
+      // const helpId = json.help_id
       // router.push(`/help/${helpId}`)
     } else {
       console.log("error")
