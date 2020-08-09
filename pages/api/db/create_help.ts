@@ -20,7 +20,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         body: body,
         timebox: Number(timebox),
         fee: Number(fee)
-    }).then(result => res.status(200).json({ help_id: help_id })).catch(err => res.status(500).json({ error: err.message }))
+    }).then(_result => res.status(200).json({ help_id: help_id })).catch(err => res.status(500).json({ error: err.message }))
 }
 
 export default handler
