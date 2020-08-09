@@ -33,7 +33,7 @@ const HelpPage = (
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const id = query.id
-    const url = `${process.env.VERCEL_URL}/api/db/get_help_from_id?id=${id}`
+    const url = `${process.env.NODE_ENV === 'production' ? "https://chot.help" : process.env.VERCEL_URL}/api/db/get_help_from_id?id=${id}`
     const response = await fetch(url)
     const json = await response.json()
     return {
