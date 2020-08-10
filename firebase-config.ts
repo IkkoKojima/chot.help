@@ -1,6 +1,5 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/firestore';
 
 if (!firebase.apps.length) {
     firebase.initializeApp({
@@ -18,5 +17,4 @@ if (!firebase.apps.length) {
 export const providerGoogle = new firebase.auth.GoogleAuthProvider();
 export const providerFacebook = new firebase.auth.FacebookAuthProvider();
 export const providerTwitter = new firebase.auth.TwitterAuthProvider();
-export const db = firebase.firestore();
 export default firebase;
