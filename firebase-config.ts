@@ -18,3 +18,11 @@ export const providerGoogle = new firebase.auth.GoogleAuthProvider();
 export const providerFacebook = new firebase.auth.FacebookAuthProvider();
 export const providerTwitter = new firebase.auth.TwitterAuthProvider();
 export default firebase;
+
+export const handleLogin = () => {
+    firebase.auth().signInWithPopup(providerTwitter).then(function (result) {
+        console.log(result)
+    }).catch(function (error) {
+        console.log(error)
+    })
+}

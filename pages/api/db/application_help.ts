@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import uid from 'uid'
 
 const admin = require('firebase-admin');
 
@@ -30,23 +29,14 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const {
         query: {
             user_id,
-            title,
-            body,
-            timebox,
-            fee
+            help_id
         }
     } = req
-    const help_id = uid(20)
     let docRef = db.collection('helps').doc(help_id);
-    docRef.set({
-        user_id: user_id,
-        title: title,
-        body: body,
-        timebox: Number(timebox),
-        fee: Number(fee),
-        applicant: []
+    docRef.update({
+        applicant: admin.firestore.FieldValue.arrayUnion(user_id)
     })
-        .then((_result: any) => res.status(200).json({ help_id: help_id }))
+        .then((_result: any) => res.status(200))
         .catch((err: any) => res.status(500).json({ error: err.message }))
 }
 

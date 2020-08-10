@@ -1,14 +1,6 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react'
-import firebase, { providerTwitter } from '../firebase-config'
-
-const handleLogin = () => {
-    firebase.auth().signInWithPopup(providerTwitter).then(function (result) {
-        console.log(result)
-    }).catch(function (error) {
-        console.log(error)
-    })
-}
+import { handleLogin } from '../firebase-config'
 
 const LoginButton = () => {
     return (

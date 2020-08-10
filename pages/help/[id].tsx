@@ -1,15 +1,37 @@
 import Layout from '../../components/Layout'
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import { Statistic } from 'semantic-ui-react'
+import ApplicationButton from '../../components/ApplicationButton'
+import firebase from '../../firebase-config'
+import { useState } from 'react'
 
 const HelpPage = (
     {
+        id,
         user_id,
         title,
         body,
         timebox,
         fee
     }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const [user, setUser] = useState<null | firebase.User>(null)
+
+    firebase.auth().onAuthStateChanged(user => {
+        setUser(user)
+    })
+
+    const application = async () => {
+        if (user) {
+            const url = `${window.location.origin}/api/db/application_help?user_id=${user.uid}&help_id=${id}`
+            const response: Response = await fetch(url)
+            if (response.ok) {
+                console.log("success")
+            } else {
+                console.log("error")
+            }
+        }
+    }
+
     return (
         user_id !== "" ?
             <Layout title="Mypage | Next.js + TypeScript Example">
@@ -23,6 +45,7 @@ const HelpPage = (
                     <Statistic.Value>{fee}円</Statistic.Value>
                     <Statistic.Label>報酬</Statistic.Label>
                 </Statistic>
+                <ApplicationButton disabled={user ? user_id === user.uid : false} handleClick={application} />
             </Layout>
             :
             <Layout title="そのページは存在しません | Next.js + TypeScript Example">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Message } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 type Props = {
     title: string
@@ -58,19 +58,6 @@ const HelpForm = (props: Props) => {
             >
                 HELP!ツイートする<br />(まだお支払いは行われません)
                 </Button>
-            <Message>
-                <Message.Header>HELP!ツイートした後の流れ</Message.Header>
-                <Message.List>
-                    <Message.Item>あなたのツイートを見て、興味のあるメンターが申し込みをします</Message.Item>
-                    <Message.Item>あなたが申し込みの中から1人を選択すると、マッチングが成立します</Message.Item>
-                    <Message.Item>マッチング成立時に、chot.helpが一時的にあなたから料金をお預かりします</Message.Item>
-                    <Message.Item>マッチング成立後は、問題をメンターと解決していきましょう</Message.Item>
-                    <Message.Item>設定した時間が経過した後は、お互いを評価してください</Message.Item>
-                    <Message.Item>お預かりした料金から手数料を差し引いた金額がメンターに支払われます</Message.Item>
-                </Message.List>
-                <br />
-                ※ トラブルやイタズラなど、メンターが仕事を放棄したことが確認できた場合、料金は払い戻しいたします
-            </Message>
         </Form>
     )
 }
