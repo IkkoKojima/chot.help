@@ -26,7 +26,6 @@ try {
 
 let db = admin.firestore();
 
-
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const {
         query: {
