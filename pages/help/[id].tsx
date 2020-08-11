@@ -5,6 +5,8 @@ import ApplicationButton from '../../components/ApplicationButton'
 import firebase from '../../firebase-config'
 import { useState } from 'react'
 
+import Head from 'next/head'
+
 const HelpPage = (
     {
         id,
@@ -35,6 +37,25 @@ const HelpPage = (
     return (
         user_id !== "" ?
             <Layout title="Mypage | Next.js + TypeScript Example">
+                <Head>
+                    <title>インスタのハッシュタグ考えます。 | bosyu</title>
+                    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+                    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
+                    <meta name="description" content={body} />
+                    <meta property="og:url" content={`${window.location.origin}/help/${id}`} />
+                    <meta property="og:title" content={title} />
+                    <meta property="og:description" content={body} />
+                    <meta property="og:image" content="https://storage.googleapis.com/public-bosyu-production-appspot-com/uploads/bosyu/4fa5525c-a9b6-4334-ad05-5a6f0ace8b6a_ogp.png?1597129882" />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:locale" content="ja_JP" />
+                    <meta property="fb:app_id" content="584344385566686" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:site" content="@IkkoKojima" />
+                    <meta name="twitter:description" content={body} />
+                    <meta name="twitter:image" content="https://storage.googleapis.com/public-bosyu-production-appspot-com/uploads/bosyu/4fa5525c-a9b6-4334-ad05-5a6f0ace8b6a_ogp.png?1597129882" />
+                    <meta name="note:card" content="summary_large_image" />
+                    <meta content="telephone=no" name="format-detection" />
+                </Head>
                 <h1>{title}</h1>
                 <p>{body}</p>
                 <Statistic>
