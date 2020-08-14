@@ -1,6 +1,6 @@
 import Layout from '../../components/Layout'
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { Statistic } from 'semantic-ui-react'
+import { Statistic, Image, Segment, Header } from 'semantic-ui-react'
 import ApplicationButton from '../../components/ApplicationButton'
 import firebase from '../../firebase-config'
 import { useState } from 'react'
@@ -57,17 +57,8 @@ const HelpPage = (
                     <meta name="note:card" content="summary_large_image" />
                     <meta content="telephone=no" name="format-detection" />
                 </Head>
-                <h1>{title}</h1>
-                <p>{body}</p>
-                <img src={image_url} />
-                <Statistic>
-                    <Statistic.Value>{timebox}分</Statistic.Value>
-                    <Statistic.Label>時間枠</Statistic.Label>
-                </Statistic>
-                <Statistic>
-                    <Statistic.Value>{fee}円</Statistic.Value>
-                    <Statistic.Label>報酬</Statistic.Label>
-                </Statistic>
+                <Image src={image_url} centered />
+                <Segment>{body}</Segment>
                 <ApplicationButton disabled={user ? user_id === user.uid : false} handleClick={application} />
             </Layout>
             :
@@ -83,7 +74,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const response = await fetch(url)
     const json = await response.json()
 
-    const image_url = "https://source.unsplash.com/random"
+    // size : 943 x 495
+    const image_url = `https://res.cloudinary.com/chot-help/image/upload/l_text:notosansjp-bold.otf_70_bold:${json.data.title}%0A報酬%3A%C2%A5${json.data.fee}%0A時間枠%3A${json.data.timebox}分,co_rgb:FFFFFF,w_800,c_fit/v1597382728/chothelp_ogp_bg.png`
 
     return {
         props: {
