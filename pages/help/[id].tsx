@@ -1,6 +1,6 @@
 import Layout from '../../components/Layout'
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { Statistic, Image, Segment, Header } from 'semantic-ui-react'
+import { Image, Segment } from 'semantic-ui-react'
 import ApplicationButton from '../../components/ApplicationButton'
 import firebase from '../../firebase-config'
 import { useState } from 'react'
@@ -13,8 +13,6 @@ const HelpPage = (
         user_id,
         title,
         body,
-        timebox,
-        fee,
         image_url
     }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [user, setUser] = useState<null | firebase.User>(null)
