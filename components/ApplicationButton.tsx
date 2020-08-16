@@ -5,7 +5,7 @@ import LoginButton from './LoginButton';
 
 type Props = {
     handleClick: () => void
-    disabled: boolean
+    disabled?: boolean
 }
 
 const ApplicationButton = (props: Props) => {
