@@ -12,7 +12,8 @@ const client = new Twitter({
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
     async function search() {
         // reference : https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
-        const tweets = await client.get('search/tweets', { q: "#ChotHelp -RT", count: 10, result_type: "recent" })
+        // TODO url付きツイートが検索されるように修正
+        const tweets = await client.get('search/tweets', { q: "#ChotHelp -filter:retweets", count: 10, result_type: "recent" })
         return tweets
     }
     search()

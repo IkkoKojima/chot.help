@@ -23,7 +23,7 @@ try {
         credential: admin.credential.cert(serviceAccount)
     });
 } catch (err) {
-    console.log(err)
+
 }
 
 let db = admin.firestore();

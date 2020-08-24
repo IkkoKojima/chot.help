@@ -21,7 +21,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     async function getHashtags() {
-      const url = `${window.location.origin}/api/tweet/hashtag`
+      const url = `${window.location.origin}/api/twitter/hashtag`
       const response: Response = await fetch(url)
       if (response.ok) {
         const json = await response.json()

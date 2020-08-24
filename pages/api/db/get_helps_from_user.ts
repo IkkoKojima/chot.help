@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import uid from 'uid'
 
 const admin = require('firebase-admin');
 
@@ -30,24 +29,22 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const {
         query: {
             user_id,
-            title,
-            body,
-            timebox,
-            fee
         }
     } = req
-    const help_id = uid(20)
-    let docRef = db.collection('helps').doc(help_id);
-    docRef.set({
-        user_id: user_id,
-        title: title,
-        body: body,
-        timebox: Number(timebox),
-        fee: Number(fee),
-        applicant: []
-    })
-        .then((_result: any) => res.status(200).json({ help_id: help_id }))
-        .catch((err: any) => res.status(500).json({ error: err.message }))
+    let helpsRef = db.collection("helps")
+    let q = helpsRef.where("user_id", "==", user_id).get()
+        .then((snapshot: any) => {
+            if (snapshot.empty) {
+                res.status(200).json({ helps: { helps: [], ids: [] } })
+                return;
+            }
+            const helps = snapshot.docs.map((doc: any) => doc.data())
+            const ids = snapshot.docs.map((doc: any) => doc.id)
+            res.status(200).json({ helps: helps, ids: ids })
+        })
+        .catch((err: any) => {
+            res.status(500).json({ error: err })
+        })
 }
 
 export default handler
