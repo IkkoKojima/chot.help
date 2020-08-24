@@ -32,7 +32,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         }
     } = req
     let helpsRef = db.collection("helps")
-    let q = helpsRef.where("user_id", "==", user_id).get()
+    helpsRef.where("user_id", "==", user_id).get()
         .then((snapshot: any) => {
             if (snapshot.empty) {
                 res.status(200).json({ helps: { helps: [], ids: [] } })
