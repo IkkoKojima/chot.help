@@ -35,7 +35,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     helpsRef.where("user_id", "==", user_id).get()
         .then((snapshot: any) => {
             if (snapshot.empty) {
-                res.status(200).json({ helps: { helps: [], ids: [] } })
+                res.status(200).json({ helps: [], ids: [] })
                 return;
             }
             const helps = snapshot.docs.map((doc: any) => doc.data())
