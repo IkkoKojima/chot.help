@@ -6,6 +6,7 @@ import LoginButton from '../components/LoginButton'
 import { Card, Image, List, Button, Icon } from 'semantic-ui-react'
 import { Help } from '../domains/Help'
 import Link from 'next/link'
+import ReceivingButton from '../components/ReceivingButton'
 
 const Mypage = () => {
     const [user, setUser] = useState<null | firebase.User>(null)
@@ -98,7 +99,7 @@ const Mypage = () => {
                                                                 </List.Content>
                                                                 <Button icon><a target="_blank" rel="noreferrer noopener" href={`https://twitter.com/${a.screen_name}`}><Icon name="twitter" /></a></Button>
                                                                 {/* TODO このボタンクリックで、応募者を承認し、セッションを始めることができるようにする */}
-                                                                <Button primary>この人に頼む</Button>
+                                                                <ReceivingButton twitterUser={a} timebox={h.timebox} fee={h.fee} handleClick={() => { }} />
                                                             </List.Item>
                                                         )
                                                     })

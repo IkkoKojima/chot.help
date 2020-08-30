@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const admin = require('firebase-admin');
-// let serviceAccount = require('../../../chot-help-40e7abe408c2.json');
 
 const serviceAccount = {
     type: process.env.type,
