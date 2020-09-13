@@ -112,6 +112,7 @@ const HelpPage = (
                     :
                     <ApplicationButton handleClick={application} />
                 }
+                {/* TODO : チャットルームを作り、supporterがいる場合は2者が閲覧できるようにする */}
             </Layout>
             :
             <Layout title="そのページは存在しません | Next.js + TypeScript Example">

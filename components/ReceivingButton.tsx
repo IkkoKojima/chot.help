@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import { Button, Modal, Image, Header, Message } from 'semantic-ui-react'
 import firebase from 'firebase';
 import LoginButton from './LoginButton';
+import { useRouter } from 'next/router';
 
 type Props = {
     twitterUser: any
     timebox: number
     fee: number
     handleClick: () => void
+    link: string
     disabled?: boolean
 }
 
 const ReceivingButton = (props: Props) => {
     const [open, setOpen] = useState<boolean>(false)
     const [user, setUser] = useState<null | firebase.User>(null)
-    const [done, setDone] = useState<boolean>(false)
+    const router = useRouter()
 
     firebase.auth().onAuthStateChanged(user => {
         setUser(user)
@@ -62,22 +64,15 @@ const ReceivingButton = (props: Props) => {
                         やめる
         </Button>
                     <Button
-                        content="この人に決める"
+                        content="この人をサポーターにする"
                         labelPosition='right'
                         icon='checkmark'
-                        onClick={() => { props.handleClick(); setOpen(false); setDone(true) }}
+                        onClick={() => { props.handleClick(); router.push(props.link) }}
                         positive
                         disabled={!user}
                     />
                 </Modal.Actions>
             </Modal>
-            <Message
-                hidden={!done}
-                positive
-                icon='check circle outline'
-                header='マッチングが成立しました'
-                content='チャットルームに移動して、時間いっぱいサポートを受けてください'
-            />
         </React.Fragment>
     )
 }

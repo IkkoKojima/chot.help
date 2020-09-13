@@ -3,7 +3,7 @@ import firebase from '../firebase-config'
 import React, { useState, useEffect } from 'react'
 import LogoutButton from '../components/LogoutButton'
 import LoginButton from '../components/LoginButton'
-import { Card, Image, List, Button, Icon } from 'semantic-ui-react'
+import { Card, Image, List, Button, Icon, Message } from 'semantic-ui-react'
 import { Help } from '../domains/Help'
 import Link from 'next/link'
 import ReceivingButton from '../components/ReceivingButton'
@@ -11,8 +11,18 @@ import ReceivingButton from '../components/ReceivingButton'
 const Mypage = () => {
     const [user, setUser] = useState<null | firebase.User>(null)
     const [myHelps, setMyHelps] = useState<Help[]>([])
-    const [ids, setIds] = useState<number[]>([])
+    const [ids, setIds] = useState<string[]>([])
     const [applicants, setApplicants] = useState<any[]>([])
+
+    const decideSupporter = async (supporter_id: string, help_id: string) => {
+        const url = `${window.location.origin}/api/db/decide_supporter?supporter_id=${supporter_id}&help_id=${help_id}`
+        const response: Response = await fetch(url)
+        if (response.ok) {
+            console.log("success")
+        } else {
+            console.log("error")
+        }
+    }
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
@@ -88,18 +98,39 @@ const Mypage = () => {
                                             <Card.Description>
                                                 応募者
                                                 <List>
-                                                    {applicants[index] ? applicants[index].map((a: any) => {
+                                                    {applicants[index] ? applicants[index].map((a: any, aIndex: number) => {
                                                         return (
-                                                            // TODO List.Item をchot.helpアカウントのプロフィールへのリンクにする
                                                             <List.Item>
-                                                                <Image avatar src={a.profile_image_url_https} />
-                                                                <List.Content>
-                                                                    <List.Header>{a.name}</List.Header>
-                                                                    <List.Description>@{a.screen_name}</List.Description>
-                                                                </List.Content>
-                                                                <Button icon><a target="_blank" rel="noreferrer noopener" href={`https://twitter.com/${a.screen_name}`}><Icon name="twitter" /></a></Button>
-                                                                {/* TODO このボタンクリックで、応募者を承認し、セッションを始めることができるようにする */}
-                                                                <ReceivingButton twitterUser={a} timebox={h.timebox} fee={h.fee} handleClick={() => { }} />
+                                                                {h.applicant[aIndex] == h.supporter_id
+                                                                    ?
+                                                                    <Message info>
+                                                                        <p>サポーター</p>
+                                                                        <Image avatar src={a.profile_image_url_https} />
+                                                                        <List.Content>
+                                                                            <List.Header>{a.name}</List.Header>
+                                                                            <List.Description>@{a.screen_name}</List.Description>
+                                                                        </List.Content>
+                                                                        <Button icon><a target="_blank" rel="noreferrer noopener" href={`https://twitter.com/${a.screen_name}`}><Icon name="twitter" /></a></Button>
+                                                                        <Link href={`/help/${ids[index]}`}>
+                                                                            <Button primary icon><Icon name="chat" /> チャットルームに行く</Button>
+                                                                        </Link>
+                                                                    </Message>
+                                                                    :
+                                                                    <React.Fragment>
+                                                                        <Image avatar src={a.profile_image_url_https} />
+                                                                        <List.Content>
+                                                                            <List.Header>{a.name}</List.Header>
+                                                                            <List.Description>@{a.screen_name}</List.Description>
+                                                                        </List.Content>
+                                                                        <Button icon><a target="_blank" rel="noreferrer noopener" href={`https://twitter.com/${a.screen_name}`}><Icon name="twitter" /></a></Button>
+                                                                        {h.supporter_id == ""
+                                                                            ?
+                                                                            <ReceivingButton twitterUser={a} timebox={h.timebox} fee={h.fee} handleClick={() => decideSupporter(h.applicant[aIndex], ids[index])} link={`/help/${ids[index]}`} />
+                                                                            :
+                                                                            <React.Fragment />
+                                                                        }
+                                                                    </React.Fragment>
+                                                                }
                                                             </List.Item>
                                                         )
                                                     })
