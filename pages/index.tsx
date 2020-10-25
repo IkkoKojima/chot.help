@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tweet } from 'react-twitter-widgets'
 import { Button, Icon } from 'semantic-ui-react'
+import HowToUse from '../components/HowToUse'
 
 type Status = {
   id_str: string
@@ -43,6 +44,7 @@ const IndexPage = () => {
 
   return (
     <Layout title="Home | Next.js + TypeScript Example">
+      <HowToUse/>
       <h1>最近のHELP!</h1>
       <Button primary icon onClick={() => router.reload()}><Icon name="refresh" /> 更新</Button>
       {displayTweets()}
