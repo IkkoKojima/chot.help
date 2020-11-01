@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Image } from 'semantic-ui-react';
+import { List } from 'semantic-ui-react';
 
 const Flow = (left: boolean, right: boolean, title: string, body: string) => {
     const position = left ? right ? "justify-self-center border-green-400" : "justify-self-start border-yellow-400" : "justify-self-end border-indigo-400"
