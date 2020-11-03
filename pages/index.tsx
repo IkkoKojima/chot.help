@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Tweet } from 'react-twitter-widgets'
 import { Button, Icon } from 'semantic-ui-react'
 import HowToUse from '../components/HowToUse'
+import About from '../components/About'
 
 type Status = {
   id_str: string
@@ -44,6 +45,7 @@ const IndexPage = () => {
 
   return (
     <Layout title="Home | Next.js + TypeScript Example">
+      <About/>
       <HowToUse/>
       <h1>最近のHELP!</h1>
       <Button primary icon onClick={() => router.reload()}><Icon name="refresh" /> 更新</Button>

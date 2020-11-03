@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Checkbox, Card, Image } from 'semantic-ui-react';
 
 type Props = {
     title: string
@@ -8,8 +8,8 @@ type Props = {
     setBody: (body: string) => void
     timebox: string
     setTimebox: (timebox: string) => void
-    fee: string
-    setFee: (fee: string) => void
+    gift: string
+    setGift: (fee: string) => void
     handleClick: () => void
 }
 
@@ -41,15 +41,47 @@ const HelpForm = (props: Props) => {
                 step={10}
                 type="range"
             />
-            <Form.Input
-                value={props.fee}
-                onChange={(event) => props.setFee(event.target.value)}
-                label={`金額 : ${props.fee}円`}
-                min={500}
-                max={5000}
-                step={500}
-                type="range"
-            />
+            <Form.Field>
+                <label>謝礼</label>
+                <div className="flex justify-center flex-wrap">
+                    <div className={`p-5 md:w-3/12 w-10/12 `}>
+                        <div className={`border-8 hover:border-yellow-500 ${props.gift === "sho" ? "border-green-500" : ""}`}>
+                            <Card fluid onClick={() => props.setGift("sho")}  >
+                                <Image src='/sho.png' wrapped ui={false} />
+                                <Card.Content>
+                                    <Card.Header><Checkbox checked={props.gift === "sho"} /> 松コース [1,000円]</Card.Header>
+                                    <Card.Description>助けてくれた人には900円相当のラーメンが届きます。ラーメンが苦手な人には代わりに同額のAmazonギフトカードが届きます。</Card.Description>
+                                    {/* https://item.rakuten.co.jp/kikyoya/simada-3set/ */}
+                                </Card.Content>
+                            </Card>
+                        </div>
+                    </div>
+                    <div className="p-5 md:w-5/12 w-11/12">
+                        <div className={`border-8 hover:border-yellow-500 ${props.gift === "tiku" ? "border-green-500" : ""}`}>
+                            <Card fluid onClick={() => props.setGift("tiku")}>
+                                <Image src='/tiku.png' wrapped ui={false} />
+                                <Card.Content>
+                                    <Card.Header><Checkbox checked={props.gift === "tiku"} /> 竹コース [3,000円]</Card.Header>
+                                    <Card.Description>助けてくれた人には2,700円相当の押し寿司が届きます。押し寿司が苦手な人には代わりに同額のAmazonギフトカードが届きます。</Card.Description>
+                                    {/* https://item.rakuten.co.jp/w-tatibanaya/set-01/ */}
+                                </Card.Content>
+                            </Card>
+                        </div>
+                    </div>
+                    <div className="p-5 md:w-3/12 w-10/12">
+                        <div className={`border-8 hover:border-yellow-500 ${props.gift === "bai" ? "border-green-500" : ""}`}>
+                            <Card fluid onClick={() => props.setGift("bai")}>
+                                <Image src='/bai.png' wrapped ui={false} />
+                                <Card.Content>
+                                    <Card.Header><Checkbox checked={props.gift === "bai"} /> 梅コース [5,000円]</Card.Header>
+                                    <Card.Description>助けてくれた人には4,500円相当のA5ランクの黒毛和牛が届きます。牛肉が苦手な人には代わりに同額のAmazonギフトカードが届きます。</Card.Description>
+                                    {/* https://item.rakuten.co.jp/kouragumi/241000/ */}
+                                </Card.Content>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+            </Form.Field>
             <Button
                 disabled={props.title === "" || props.body === ""}
                 primary

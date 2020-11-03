@@ -5,13 +5,14 @@ import firebase from '../../firebase-config'
 import HelpForm from '../../components/HelpForm'
 import { useRouter } from 'next/router'
 import { Message } from 'semantic-ui-react'
+import HowToUse from '../../components/HowToUse'
 
 const AboutPage = () => {
   const [user, setUser] = useState<null | firebase.User>(null)
   const [title, setTitle] = useState<string>("")
   const [body, setBody] = useState<string>("")
-  const [timebox, setTimebox] = useState<string>("30")
-  const [fee, setFee] = useState<string>("1000")
+  const [timebox, setTimebox] = useState<string>("60")
+  const [gift, setGift] = useState<string>("tiku")
   const router = useRouter()
 
   async function createHelp(user_id: string, title: string, body: string, timebox: string, fee: string) {
@@ -42,26 +43,16 @@ const AboutPage = () => {
           setBody={setBody}
           timebox={timebox}
           setTimebox={setTimebox}
-          fee={fee}
-          setFee={setFee}
-          handleClick={() => createHelp(user.uid, title, body, timebox, fee)}
+          gift={gift}
+          setGift={setGift}
+          handleClick={() => createHelp(user.uid, title, body, timebox, gift)}
         />
         :
         <LoginButton />
       }
       <Message>
-        <Message.Header>HELP!ツイートした後の流れ</Message.Header>
-        <Message.List>
-          <Message.Item>あなたのツイートを見て、興味のあるメンターが申し込みをします</Message.Item>
-          <Message.Item>あなたが申し込みの中から1人を選択すると、マッチングが成立します</Message.Item>
-          <Message.Item>マッチング成立時に、chot.helpが一時的にあなたから料金をお預かりします</Message.Item>
-          <Message.Item>マッチング成立後は、問題をメンターと解決していきましょう</Message.Item>
-          <Message.Item>設定した時間が経過した後は、お互いを評価してください</Message.Item>
-          <Message.Item>お預かりした料金から手数料を差し引いた金額がメンターに支払われます</Message.Item>
-        </Message.List>
-        <br />
-                ※ トラブルやイタズラなど、メンターが仕事を放棄したことが確認できた場合、料金は払い戻しいたします
-            </Message>
+        <HowToUse />
+      </Message>
     </Layout>
   )
 }
